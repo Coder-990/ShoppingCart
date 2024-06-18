@@ -1,4 +1,4 @@
-package hr.ht.retail.ShoppingCart;
+package hr.ht.retail.shoppingCart;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package hr.ht.retail.ShoppingCart;
+package hr.ht.retail.shoppingCart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

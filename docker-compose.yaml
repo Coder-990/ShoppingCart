@@ -1,17 +1,17 @@
-version: '3.8'
 services:
-  mongo_db:
-    image: mongo:7.0
-    container_name: shoppingCart-mongo_db
-    restart: unless-stopped
-    env_file: .env
-    ports:
-    - "${MONGODB_LOCAL_PORT}:${MONGODB_DOCKER_PORT}"
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    env_file:
+      - ./.env
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGODB_DB}
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: shoppingCart
+    ports:
+      - "27017:27017"
     volumes:
       - mongo-data:/data/db
 volumes:
-    mongo-data:
+  mongo-data:
