@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  mongo_db:
+    image: mongo:7.0
+    container_name: shoppingCart-mongo_db
+    restart: unless-stopped
+    env_file: .env
+    ports:
+    - "${MONGODB_LOCAL_PORT}:${MONGODB_DOCKER_PORT}"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DB}
+    volumes:
+      - mongo-data:/data/db
+volumes:
+    mongo-data:
