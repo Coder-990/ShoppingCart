@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-@ChangeUnit(id = "create-cart_item-collection", order = "002", author = "dBorovcak")
+@ChangeUnit(id = "create-cartItem-collection", order = "002", author = "dBorovcak")
 @RequiredArgsConstructor
 public class Migration002CreateCartItemCollection {
 
@@ -16,8 +16,8 @@ public class Migration002CreateCartItemCollection {
 
     @Execution
     public void createCartItemCollection() {
-        mongoTemplate.createCollection("cart_item")
-                .createIndex(new Document("id", 1), new IndexOptions().name("cart_item-id-index"));
+        mongoTemplate.createCollection("cartItem")
+                .createIndex(new Document("id", 1), new IndexOptions().name("cartItem-id-index"));
     }
 
     @RollbackExecution
