@@ -8,4 +8,5 @@ spring:
       database: shoppingCart
       
 mongock:
+  enabled: true
   migration-scan-package: hr.ht.retail.shoppingCart.config.migrations

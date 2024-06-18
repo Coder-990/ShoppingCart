@@ -8,20 +8,20 @@ import lombok.RequiredArgsConstructor;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-@ChangeUnit(id = "create-price-collection", order = "001", author = "dBorovcak")
+@ChangeUnit(id = "create-shopping_cart-collection", order = "003", author = "dBorovcak")
 @RequiredArgsConstructor
-public class Migration001CreatePriceCollection {
+public class Migration003CreateShoppingCartCollection {
 
     private final MongoTemplate mongoTemplate;
 
     @Execution
-    public void createPriceCollection() {
-        mongoTemplate.createCollection("price")
-                .createIndex(new Document("id", 1), new IndexOptions().name("price-id-index"));
+    public void createShoppingCartCollection() {
+        mongoTemplate.createCollection("shopping_cart")
+                .createIndex(new Document("id", 1), new IndexOptions().name("shopping_cart-id-index"));
     }
 
     @RollbackExecution
-    public void rollbackPriceCollection() {
+    public void rollbackShoppingCartCollection() {
         // Change is backward-compatible; no need to implement a rollback mechanism.
     }
 }
