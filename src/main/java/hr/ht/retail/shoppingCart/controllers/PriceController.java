@@ -16,33 +16,29 @@ public class PriceController {
 
     private final PriceService priceService;
 
-    @PostMapping
-    public ResponseEntity<Price> createPrice(@RequestBody Price price) {
-        var createdPrice = priceService.createPrice(price);
-        return new ResponseEntity<>(createdPrice, HttpStatus.CREATED);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Price> getPriceById(@PathVariable String id) {
-        var price = priceService.getPriceById(id);
-        return price.map(ResponseEntity::ok)
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
     @GetMapping
     public ResponseEntity<List<Price>> getAllPrices() {
         var prices = priceService.getAllPrices();
         return new ResponseEntity<>(prices, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Price> getPriceById(@PathVariable String id) {
+        var price = priceService.getPriceById(id);
+        return new ResponseEntity<>(price, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Price> createPrice(@RequestBody Price price) {
+        var createdPrice = priceService.createPrice(price);
+        return new ResponseEntity<>(createdPrice, HttpStatus.CREATED);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Price> updatePrice(@PathVariable String id, @RequestBody Price price) {
-        try {
-            var updatedPrice = priceService.updatePrice(id, price);
-            return new ResponseEntity<>(updatedPrice, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        var updatedPrice = priceService.updatePrice(id, price);
+        return new ResponseEntity<>(updatedPrice, HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")

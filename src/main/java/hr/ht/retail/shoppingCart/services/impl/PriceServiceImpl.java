@@ -1,5 +1,6 @@
 package hr.ht.retail.shoppingCart.services.impl;
 
+import hr.ht.retail.shoppingCart.exceptions.NotFoundException;
 import hr.ht.retail.shoppingCart.repositories.PriceRepository;
 import hr.ht.retail.shoppingCart.repositories.models.Price;
 import hr.ht.retail.shoppingCart.services.PriceService;
@@ -21,8 +22,9 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Optional<Price> getPriceById(String id) {
-        return priceRepository.findById(id);
+    public Price getPriceById(String id) {
+        return priceRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(("Could not find price by this id %s").formatted(id)));
     }
 
     @Override
@@ -32,14 +34,13 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public Price updatePrice(String id, Price price) {
-        getPriceById(id)
+        Optional.of(getPriceById(id))
                 .map(existingPrice -> {
                     existingPrice.setType(price.getType());
                     existingPrice.setValue(price.getValue());
                     existingPrice.setRecurrences(price.getRecurrences());
                     return priceRepository.save(existingPrice);
-                })
-                .orElseThrow(() -> new RuntimeException("Price not found"));
+                });
         return price;
     }
 

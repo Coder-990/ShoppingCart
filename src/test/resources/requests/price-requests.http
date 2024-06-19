@@ -1,0 +1,57 @@
+@localServer=http://localhost:8080
+@server={{localServer}}
+@id1=6672dc953ac5324f7191529e
+@id2=6672dc763ac5324f7191529d
+
+### Get all prices for the particular Id
+GET {{server}}/v1/prices
+Content-Type: application/json
+
+### Get one price for the particular Id
+GET {{server}}/v1/prices/{{id2}}
+Content-Type: application/json
+
+### Create price for the particular Id
+POST {{server}}/v1/prices
+Content-Type: application/json
+
+{
+  "type": "RECURRING",
+  "value": 10.00,
+  "recurrences": 12
+}
+
+### Create price for the particular Id
+POST {{server}}/v1/prices
+Content-Type: application/json
+
+{
+  "type": "RECURRING",
+  "value": 20.00,
+  "recurrences": 6
+}
+
+### Create price for the particular Id
+POST {{server}}/v1/prices
+Content-Type: application/json
+
+{
+  "type": "ONE_TIME",
+  "value": 100.00,
+  "recurrences": 0
+}
+
+### Update price for the particular Id
+PUT {{server}}/v1/prices/{{id1}}
+Content-Type: application/json
+
+{
+  "type": "RECURRING",
+  "value": 5.00,
+  "recurrences": 24
+}
+
+### Delete price for this particular id
+DELETE {{server}}/v1/prices/{{id1}}
+Content-Type: application/json
+
