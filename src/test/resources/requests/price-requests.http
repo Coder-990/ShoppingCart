@@ -1,14 +1,14 @@
 @localServer=http://localhost:8080
 @server={{localServer}}
-@id1=6672dc953ac5324f7191529e
-@id2=6672dc763ac5324f7191529d
+@id1=66743a258d7d581568256ea4
+@id2=66743641c754183a747c06bb
 
 ### Get all prices for the particular Id
 GET {{server}}/v1/prices
 Content-Type: application/json
 
 ### Get one price for the particular Id
-GET {{server}}/v1/prices/{{id2}}
+GET {{server}}/v1/prices/{{id1}}
 Content-Type: application/json
 
 ### Create price for the particular Id
@@ -47,7 +47,7 @@ Content-Type: application/json
 
 {
   "type": "RECURRING",
-  "value": 5.00,
+  "value": 88.00,
   "recurrences": 24
 }
 

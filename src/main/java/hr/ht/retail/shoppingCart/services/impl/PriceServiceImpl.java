@@ -34,14 +34,11 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public Price updatePrice(String id, Price price) {
-        Optional.of(getPriceById(id))
-                .map(existingPrice -> {
-                    existingPrice.setType(price.getType());
-                    existingPrice.setValue(price.getValue());
-                    existingPrice.setRecurrences(price.getRecurrences());
-                    return priceRepository.save(existingPrice);
-                });
-        return price;
+        var existingPrice = getPriceById(id);
+        existingPrice.setType(price.getType());
+        existingPrice.setValue(price.getValue());
+        existingPrice.setRecurrences(price.getRecurrences());
+        return priceRepository.save(existingPrice);
     }
 
     @Override

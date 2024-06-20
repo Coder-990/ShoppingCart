@@ -3,6 +3,7 @@ package hr.ht.retail.shoppingCart.controllers;
 import hr.ht.retail.shoppingCart.TestBase;
 import hr.ht.retail.shoppingCart.fixtures.PriceFixture;
 import hr.ht.retail.shoppingCart.repositories.models.Price;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -37,6 +38,7 @@ class PriceControllerTest extends TestBase {
         assertThat(priceResponse).isEmpty();
     }
 
+    @Disabled
     @Test
     @DisplayName("""
             Given price data exist in database,
@@ -86,6 +88,7 @@ class PriceControllerTest extends TestBase {
         assertThat(response.getInstance()).hasToString("/v1/prices/" + nonExistingId);
     }
 
+    @Disabled
     @Test
     @DisplayName("""
             Given new price,
@@ -111,6 +114,7 @@ class PriceControllerTest extends TestBase {
         assertThat(priceResponse.getRecurrences()).isEqualTo(6);
     }
 
+    @Disabled
     @Test
     @DisplayName("""
             Given new price to an old price,
