@@ -3,7 +3,6 @@ package hr.ht.retail.shoppingCart.controllers;
 import hr.ht.retail.shoppingCart.TestBase;
 import hr.ht.retail.shoppingCart.fixtures.PriceFixture;
 import hr.ht.retail.shoppingCart.repositories.models.Price;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -38,7 +37,6 @@ class PriceControllerTest extends TestBase {
         assertThat(priceResponse).isEmpty();
     }
 
-    @Disabled
     @Test
     @DisplayName("""
             Given price data exist in database,
@@ -57,7 +55,7 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         // then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getId()).isEqualTo("1");
+        assertThat(priceResponse.getId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("ONE_TIME");
         assertThat(priceResponse.getValue()).isEqualTo("100");
     }
@@ -88,7 +86,6 @@ class PriceControllerTest extends TestBase {
         assertThat(response.getInstance()).hasToString("/v1/prices/" + nonExistingId);
     }
 
-    @Disabled
     @Test
     @DisplayName("""
             Given new price,
@@ -108,13 +105,12 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         //then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getId()).isEqualTo("1");
+        assertThat(priceResponse.getId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("RECURRING");
         assertThat(priceResponse.getValue()).isEqualTo(new BigDecimal("10"));
         assertThat(priceResponse.getRecurrences()).isEqualTo(6);
     }
 
-    @Disabled
     @Test
     @DisplayName("""
             Given new price to an old price,
@@ -136,7 +132,7 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         //then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getId()).isEqualTo("1");
+        assertThat(priceResponse.getId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("ONE_TIME");
         assertThat(priceResponse.getValue()).isEqualTo(new BigDecimal("100"));
         assertThat(priceResponse.getRecurrences()).isEqualTo(0);
