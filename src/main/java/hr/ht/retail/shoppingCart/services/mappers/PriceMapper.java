@@ -14,20 +14,11 @@ import java.util.List;
 public interface PriceMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "type", target = "type")
-    @Mapping(source = "value", target = "value")
-    @Mapping(source = "recurrences", target = "recurrences")
     Price toAddPrice(AddPriceRequest addPriceRequest);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "type", target = "type")
-    @Mapping(source = "value", target = "value")
-    @Mapping(source = "recurrences", target = "recurrences")
     Price toModifyPrice(ModifyPriceRequest priceRequest);
 
-    @Mapping(source = "type", target = "type")
-    @Mapping(source = "value", target = "value")
-    @Mapping(source = "recurrences", target = "recurrences")
     PriceResponse toPriceResponse(Price price);
 
     List<PriceResponse> toListPriceResponse(List<Price> prices);

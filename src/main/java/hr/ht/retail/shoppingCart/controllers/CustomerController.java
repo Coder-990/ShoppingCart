@@ -1,7 +1,9 @@
 package hr.ht.retail.shoppingCart.controllers;
 
+import hr.ht.retail.shoppingCart.controllers.responses.CustomerResponse;
 import hr.ht.retail.shoppingCart.repositories.models.Customer;
 import hr.ht.retail.shoppingCart.services.CustomerService;
+import hr.ht.retail.shoppingCart.services.mappers.CustomerMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,11 +20,15 @@ import java.util.List;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final CustomerMapper customerMapper;
 
     @GetMapping
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        List<Customer> customers = customerService.getAllCustomers();
-        return new ResponseEntity<>(customers, HttpStatus.OK);
+    public ResponseEntity<List<CustomerResponse>> getAllCustomers() {
+        log.info("Fetching all customers ...");
+        var customers = customerService.getAllCustomers();
+        var listCustomerResponse = customerMapper.toListCustomerResponse(customers);
+        log.info("Fetched customers with content {}...", listCustomerResponse);
+        return new ResponseEntity<>(listCustomerResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

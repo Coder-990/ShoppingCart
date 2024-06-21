@@ -13,7 +13,8 @@ public class Customer {
 
     @Id
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     @DBRef
     private ShoppingCart shoppingCart;

@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer updateCustomer(String id, Customer customer) {
         var existingCustomer = getCustomerById(id);
-        existingCustomer.setName(customer.getName());
+        existingCustomer.setFirstName(customer.getFirstName());
         existingCustomer.setEmail(customer.getEmail());
         existingCustomer.setShoppingCart(customer.getShoppingCart());
         return customerRepository.save(existingCustomer);
