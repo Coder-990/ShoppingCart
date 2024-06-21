@@ -9,7 +9,7 @@ public interface PriceService {
 
     Price getPriceById(String id);
 
-    Price createPrice(Price price);
+    Price savePrice(Price price);
 
     Price updatePrice(String id, Price price);
 

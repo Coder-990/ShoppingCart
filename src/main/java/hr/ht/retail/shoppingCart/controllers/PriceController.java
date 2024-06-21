@@ -3,7 +3,6 @@ package hr.ht.retail.shoppingCart.controllers;
 import hr.ht.retail.shoppingCart.controllers.requests.AddPriceRequest;
 import hr.ht.retail.shoppingCart.controllers.requests.ModifyPriceRequest;
 import hr.ht.retail.shoppingCart.controllers.responses.PriceResponse;
-import hr.ht.retail.shoppingCart.repositories.models.Price;
 import hr.ht.retail.shoppingCart.services.PriceService;
 import hr.ht.retail.shoppingCart.services.mappers.PriceMapper;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +46,7 @@ public class PriceController {
     public ResponseEntity<PriceResponse> createPrice(@RequestBody AddPriceRequest addPriceRequest) {
         log.info("Creating price with body {}...", addPriceRequest);
         var price = priceMapper.toAddPrice(addPriceRequest);
-        var createdPrice = priceService.createPrice(price);
+        var createdPrice = priceService.savePrice(price);
         var priceResponse = priceMapper.toPriceResponse(createdPrice);
         log.info("Price for id: {} created {}...", createdPrice.getId(), priceResponse);
         return new ResponseEntity<>(priceResponse, HttpStatus.CREATED);
