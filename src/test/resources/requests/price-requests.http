@@ -1,6 +1,6 @@
 @localServer=http://localhost:8080
 @server={{localServer}}
-@id1=66743a258d7d581568256ea4
+@id1=66758484a291af0f27d7f06e
 @id2=66743641c754183a747c06bb
 
 ### Get all prices for the particular Id
@@ -16,9 +16,9 @@ POST {{server}}/v1/prices
 Content-Type: application/json
 
 {
-  "type": "RECURRING",
-  "value": 10.00,
-  "recurrences": 12
+  "type": "ONE_TIME",
+  "value": 144.00,
+  "recurrences": null
 }
 
 ### Create price for the particular Id
@@ -28,7 +28,7 @@ Content-Type: application/json
 {
   "type": "RECURRING",
   "value": 20.00,
-  "recurrences": 6
+  "recurrences": 13
 }
 
 ### Create price for the particular Id
@@ -36,9 +36,9 @@ POST {{server}}/v1/prices
 Content-Type: application/json
 
 {
-  "type": "ONE_TIME",
+  "type": "RECURRING",
   "value": 100.00,
-  "recurrences": 0
+  "recurrences": 11
 }
 
 ### Update price for the particular Id
@@ -47,7 +47,7 @@ Content-Type: application/json
 
 {
   "type": "RECURRING",
-  "value": 88.00,
+  "value": 18.75,
   "recurrences": 24
 }
 

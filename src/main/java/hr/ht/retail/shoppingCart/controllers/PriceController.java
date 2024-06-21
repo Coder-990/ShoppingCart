@@ -10,14 +10,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/v1/prices")
-@RequiredArgsConstructor
 @Slf4j
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/v1/prices")
 public class PriceController {
 
     private final PriceService priceService;
@@ -43,7 +44,7 @@ public class PriceController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PriceResponse> createPrice(@RequestBody AddPriceRequest addPriceRequest) {
+    public ResponseEntity<PriceResponse> createPrice(@Validated @RequestBody AddPriceRequest addPriceRequest) {
         log.info("Creating price with body {}...", addPriceRequest);
         var price = priceMapper.toAddPrice(addPriceRequest);
         var createdPrice = priceService.savePrice(price);
@@ -52,8 +53,9 @@ public class PriceController {
         return new ResponseEntity<>(priceResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PriceResponse> updatePrice(@PathVariable String id, @RequestBody ModifyPriceRequest modifyPriceRequest) {
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PriceResponse> updatePrice(@PathVariable String id, @Validated @RequestBody ModifyPriceRequest modifyPriceRequest) {
         log.info("Modifying price with body {}...", modifyPriceRequest);
         var price = priceMapper.toModifyPrice(modifyPriceRequest);
         var modyfiedPrice = priceService.updatePrice(id, price);

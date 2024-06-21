@@ -4,6 +4,7 @@ import hr.ht.retail.shoppingCart.exceptions.NotFoundException;
 import hr.ht.retail.shoppingCart.repositories.PriceRepository;
 import hr.ht.retail.shoppingCart.repositories.models.Price;
 import hr.ht.retail.shoppingCart.services.PriceService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,21 +28,35 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Price savePrice(Price price) {
+    public Price savePrice(@Valid Price price) {
+        validateRecurrences(price);
         return priceRepository.save(price);
     }
 
     @Override
     public Price updatePrice(String id, Price price) {
         var existingPrice = getPriceById(id);
+        validateRecurrences(price);
         existingPrice.setType(price.getType());
         existingPrice.setValue(price.getValue());
         existingPrice.setRecurrences(price.getRecurrences());
         return priceRepository.save(existingPrice);
     }
 
+    private void validateRecurrences(Price price) {
+        if ("ONE_TIME".equals(price.getType()) && price.getRecurrences() != null) {
+            throw new IllegalArgumentException("Recurrences should be null for ONE_TIME type");
+        } else if ("RECURRING".equals(price.getType())) {
+            var recurrences = price.getRecurrences();
+            if (recurrences == null || (recurrences != 7 && (recurrences < 12 || recurrences > 24))) {
+                throw new IllegalArgumentException("Recurrences must be exactly 7 days or between 12 to 24 months for RECURRING type");
+            }
+        }
+    }
+
     @Override
     public void deletePrice(String id) {
         priceRepository.deleteById(id);
     }
+
 }
