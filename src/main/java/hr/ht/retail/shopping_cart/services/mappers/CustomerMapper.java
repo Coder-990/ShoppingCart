@@ -17,6 +17,7 @@ public interface CustomerMapper {
     @Mapping(target = "id", ignore = true)
     Customer toAddCustomer(AddCustomerRequest addCustomerRequest);
 
+    @Mapping(target = "shoppingCart", ignore = true)
     @Mapping(target = "id", ignore = true)
     Customer toModifyCustomer(ModifyCustomerRequest modifyCustomerRequest);
 

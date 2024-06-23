@@ -1,0 +1,33 @@
+@localServer=http://localhost:8080
+@server={{localServer}}
+@id1=66788ec8b95e4715219a7f7f
+@id2=66788a4bd40709137bbeeb04
+
+### Get all cart items
+GET {{server}}/v1/cart-items
+Content-Type: application/json
+
+### Get all cart items by the particular id
+GET {{server}}/v1/cart-items
+Content-Type: application/json
+
+### Create cart item
+POST {{server}}/v1/cart-items
+Content-Type: application/json
+
+{
+  "offerId": "firstOffer",
+  "action": "ADD",
+  "prices": [
+    {
+      "type": "RECURRING",
+      "value": 20.00,
+      "recurrences": 13
+    }
+  ],
+  "customer": {
+              "firstName": "John",
+              "lastName": "Doe",
+              "email": "john.doe@email.com"
+              }
+}
