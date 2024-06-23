@@ -29,7 +29,7 @@ public class CustomerController {
         log.info("Fetching all customers ...");
         var customers = customerService.getAllCustomers();
         var listCustomerResponse = customerMapper.toListCustomerResponse(customers);
-        log.info("Fetched customers with content {}...", listCustomerResponse);
+        log.info("Fetched customers with content {} ...", listCustomerResponse);
         return new ResponseEntity<>(listCustomerResponse, HttpStatus.OK);
     }
 
@@ -45,7 +45,7 @@ public class CustomerController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CustomerResponse> createCustomer(@Validated @RequestBody AddCustomerRequest addCustomerRequest) {
-        log.info("Creating addCustomerRequest with body {}...", addCustomerRequest);
+        log.info("Creating customer with body {}...", addCustomerRequest);
         var customer = customerMapper.toAddCustomer(addCustomerRequest);
         var savedCustomer = customerService.saveCustomer(customer);
         var customerResponse = customerMapper.toCustomerResponse(savedCustomer);
@@ -67,9 +67,9 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable String id) {
-        log.info("Removing content with id: {}...", id);
+        log.info("Removing customer with id: {}...", id);
         customerService.deleteCustomer(id);
-        log.info("Removed customer for id: {} and subscription is canceled", id);
+        log.info("Removed customer for id: {}...", id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

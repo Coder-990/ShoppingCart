@@ -4,6 +4,8 @@ import hr.ht.retail.shopping_cart.exceptions.NotFoundException;
 import hr.ht.retail.shopping_cart.repositories.CartItemRepository;
 import hr.ht.retail.shopping_cart.repositories.models.CartItem;
 import hr.ht.retail.shopping_cart.services.CartItemService;
+import hr.ht.retail.shopping_cart.services.CustomerService;
+import hr.ht.retail.shopping_cart.services.PriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class CartItemServiceImpl implements CartItemService {
 
     private final CartItemRepository cartItemRepository;
+    private final PriceService priceService;
+    private final CustomerService customerService;
 
     @Override
     public List<CartItem> getAllCartItems() {
@@ -36,7 +40,7 @@ public class CartItemServiceImpl implements CartItemService {
         var existingCartItem = getCartItemById(id);
         existingCartItem.setOfferId(cartItem.getOfferId());
         existingCartItem.setAction(cartItem.getAction());
-        existingCartItem.setPrices(cartItem.getPrices());
+        existingCartItem.setPrice(cartItem.getPrice());
         existingCartItem.setCustomer(cartItem.getCustomer());
         return cartItemRepository.save(existingCartItem);
     }

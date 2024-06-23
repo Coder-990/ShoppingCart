@@ -3,7 +3,7 @@
 @id1=66758484a291af0f27d7f06e
 @id2=66743641c754183a747c06bb
 
-### Get all prices for the particular Id
+### Get all prices
 GET {{server}}/v1/prices
 Content-Type: application/json
 
@@ -11,7 +11,7 @@ Content-Type: application/json
 GET {{server}}/v1/prices/{{id1}}
 Content-Type: application/json
 
-### Create price for the particular Id
+### Create price
 POST {{server}}/v1/prices
 Content-Type: application/json
 
@@ -21,7 +21,7 @@ Content-Type: application/json
   "recurrences": null
 }
 
-### Create price for the particular Id
+### Create price
 POST {{server}}/v1/prices
 Content-Type: application/json
 
@@ -31,14 +31,14 @@ Content-Type: application/json
   "recurrences": 13
 }
 
-### Create price for the particular Id
+### Create price
 POST {{server}}/v1/prices
 Content-Type: application/json
 
 {
   "type": "RECURRING",
   "value": 100.00,
-  "recurrences": 11
+  "recurrences": 7
 }
 
 ### Update price for the particular Id

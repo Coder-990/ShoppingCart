@@ -1,0 +1,36 @@
+@localServer=http://localhost:8080
+@server={{localServer}}
+@id1=66788ec8b95e4715219a7f7f
+@id2=66788a4bd40709137bbeeb04
+
+### Get all customers
+GET {{server}}/v1/customers
+Content-Type: application/json
+
+### Get one customer for the particular Id
+GET {{server}}/v1/customers/{{id1}}
+Content-Type: application/json
+
+### Create customer
+POST {{server}}/v1/customers
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@email.com"
+}
+
+### Update customer for the particular Id
+PUT {{server}}/v1/customers/{{id1}}
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "doejohn@email.com"
+}
+
+### Delete for this particular id
+DELETE {{server}}/v1/customers/{{id1}}
+Content-Type: application/json

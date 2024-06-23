@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
         var existingCustomer = getCustomerById(id);
         existingCustomer.setFirstName(customer.getFirstName());
         existingCustomer.setEmail(customer.getEmail());
-        existingCustomer.setShoppingCart(customer.getShoppingCart());
+//        existingCustomer.setShoppingCart(customer.getShoppingCart());
         return customerRepository.save(existingCustomer);
     }
 

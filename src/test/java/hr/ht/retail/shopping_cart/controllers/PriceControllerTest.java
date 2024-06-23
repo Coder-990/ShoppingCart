@@ -20,7 +20,7 @@ class PriceControllerTest extends TestBase {
 
     @Test
     @DisplayName("""
-            Given no data of any prices,
+            Given no data of any price,
             when fetching price by id,
             then is expected to return empty list
             """)
@@ -83,7 +83,7 @@ class PriceControllerTest extends TestBase {
         assertThat(response.getTitle()).isEqualTo("Not Found");
         assertThat(response.getStatus()).isEqualTo(404);
         assertThat(response.getDetail()).isEqualTo("Could not find price by this id " + nonExistingId);
-        assertThat(response.getInstance()).hasToString("/v1/prices/" + nonExistingId);
+        assertThat(response.getInstance()).hasToString("/v1/price/" + nonExistingId);
     }
 
     @Test
@@ -140,8 +140,8 @@ class PriceControllerTest extends TestBase {
 
     @Test
     @DisplayName("""
-            Given multiple prices exists in list,
-            when fetching prices by requested existing id
+            Given multiple price exists in list,
+            when fetching price by requested existing id
             then expected price should be removed and returned status no content
             """)
     void shouldReturnStatusNoContentOfRemovedPrice() throws Exception {
