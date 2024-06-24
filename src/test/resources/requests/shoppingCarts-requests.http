@@ -1,0 +1,62 @@
+@localServer=http://localhost:8080
+@server={{localServer}}
+@id1=6679597216af2f4f562014f3
+@id2=66788a4bd40709137bbeeb04
+
+### Get all shopping carts
+GET {{server}}/v1/shoppingCarts
+Content-Type: application/json
+
+### Get one shopping cart by particular id
+GET {{server}}/v1/shoppingCarts/{{id1}}
+Content-Type: application/json
+
+### Create shopping cart
+POST {{server}}/v1/shoppingCarts
+Content-Type: application/json
+
+{
+  "cartItems": [
+    {
+      "offerId": "firstOffer",
+      "action": "ADD",
+      "price": {
+        "type": "RECURRING",
+        "value": 20.00,
+        "recurrences": 13
+      },
+      "customer": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@email.com"
+      }
+    }
+  ]
+}
+
+### Update shopping cart by particular id
+PUT {{server}}/v1/shoppingCarts/{{id1}}
+Content-Type: application/json
+
+{
+  "cartItems": [
+    {
+      "offerId": "firstOffer",
+      "action": "ADD",
+      "price": {
+        "type": "RECURRING",
+        "value": 20.00,
+        "recurrences": 13
+      },
+      "customer": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@email.com"
+      }
+    }
+  ]
+}
+
+### Get one shopping cart by particular id
+DELETE {{server}}/v1/shoppingCarts/{{id1}}
+Content-Type: application/json

@@ -26,10 +26,10 @@ public class CartItemController {
 
     @GetMapping
     public ResponseEntity<List<CartItemResponse>> getAllCartItems() {
-        log.info("Fetching all cart items ...");
+        log.info("Fetching all cart cartItems ...");
         var cartItems = cartItemService.getAllCartItems();
         var listCartItemResponses = cartItemMapper.toListCartItemResponses(cartItems);
-        log.info("Fetched cart items with content {}...", listCartItemResponses);
+        log.info("Fetched cart cartItems with content {}...", listCartItemResponses);
         return new ResponseEntity<>(listCartItemResponses, HttpStatus.OK);
     }
 

@@ -13,7 +13,6 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CartItemMapper {
 
-
     @Mapping(target = "id", ignore = true)
     CartItem toAddCartItem(AddCartItem addCartItem);
 
@@ -21,6 +20,8 @@ public interface CartItemMapper {
     CartItem toModifyCartItem(ModifyCartItem modifyCartItem);
 
     CartItemResponse toCartItemResponse(CartItem cartItem);
+
+    CartItem toCartItem(CartItem cartItem);
 
     List<CartItemResponse> toListCartItemResponses(List<CartItem> cartItems);
 
