@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 public class Price {
 
     @Id
-    private String id;
-    private String type; // "RECURRING" or "ONE_TIME"
+    private String priceId;
+    private String type;
     private BigDecimal value;
-    private Integer recurrences; // only for RECURRING type
+    private Integer recurrences;
 }

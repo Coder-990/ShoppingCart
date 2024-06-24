@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Builder
 public record ModifyCustomerRequest(
+        String customerId,
         @NotNull @Size (min = 3, max = 25) String firstName,
         @NotNull @Size (min = 3, max = 25) String lastName,
         @NotNull @Email String email

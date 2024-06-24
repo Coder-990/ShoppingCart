@@ -13,22 +13,11 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CartItemMapper {
 
-    @Mapping(target = "price.type", source = "type")
-    @Mapping(target = "price.value", source = "value")
-    @Mapping(target = "price.recurrences", source = "recurrences")
-    @Mapping(target = "customer.firstName", source = "firstName")
-    @Mapping(target = "customer.lastName", source = "lastName")
-    @Mapping(target = "customer.email", source = "email")
-    @Mapping(target = "id",ignore = true)
+
+    @Mapping(target = "id", ignore = true)
     CartItem toAddCartItem(AddCartItem addCartItem);
 
-    @Mapping(target = "price.type", source = "type")
-    @Mapping(target = "price.value", source = "value")
-    @Mapping(target = "price.recurrences", source = "recurrences")
-    @Mapping(target = "customer.firstName", source = "firstName")
-    @Mapping(target = "customer.lastName", source = "lastName")
-    @Mapping(target = "customer.email", source = "email")
-    @Mapping(target = "id",ignore = true)
+    @Mapping(target = "id", ignore = true)
     CartItem toModifyCartItem(ModifyCartItem modifyCartItem);
 
     CartItemResponse toCartItemResponse(CartItem cartItem);

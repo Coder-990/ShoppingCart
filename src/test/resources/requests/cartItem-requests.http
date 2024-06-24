@@ -18,10 +18,14 @@ Content-Type: application/json
 {
   "offerId": "firstOffer",
   "action": "ADD",
-  "type": "RECURRING",
-  "value": 20.00,
-  "recurrences": 13,
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.die@email.com"
+  "price": {
+    "type": "RECURRING",
+    "value": 20.00,
+    "recurrences": 13
+  },
+  "customer": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.die@email.com"
+  }
 }

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 @Builder
 public record AddPriceRequest(
+        String priceId,
         @NotNull @Pattern(regexp = "RECURRING|ONE_TIME", message = "Type must be either 'RECURRING' or 'ONE_TIME'")
         String type,
         @NotNull @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")

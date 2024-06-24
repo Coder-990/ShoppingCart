@@ -55,7 +55,7 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         // then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getId()).isNull();
+        assertThat(priceResponse.getPriceId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("ONE_TIME");
         assertThat(priceResponse.getValue()).isEqualTo("100");
     }
@@ -66,7 +66,7 @@ class PriceControllerTest extends TestBase {
             when fetching price by existing id,
             then is expected to return price by fetched id
             """)
-    public void shouldReturnPriceByNonExistingId() throws Exception {
+    public void shouldReturnNotFoundExceptionByNonExistingId() throws Exception {
         // given
         priceRepository.save(PriceFixture.getPriceBuilder().build());
         // when
@@ -83,7 +83,7 @@ class PriceControllerTest extends TestBase {
         assertThat(response.getTitle()).isEqualTo("Not Found");
         assertThat(response.getStatus()).isEqualTo(404);
         assertThat(response.getDetail()).isEqualTo("Could not find price by this id " + nonExistingId);
-        assertThat(response.getInstance()).hasToString("/v1/price/" + nonExistingId);
+        assertThat(response.getInstance()).hasToString("/v1/prices/" + nonExistingId);
     }
 
     @Test
@@ -105,10 +105,10 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         //then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getId()).isNull();
+        assertThat(priceResponse.getPriceId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("RECURRING");
         assertThat(priceResponse.getValue()).isEqualTo(new BigDecimal("10"));
-        assertThat(priceResponse.getRecurrences()).isEqualTo(6);
+        assertThat(priceResponse.getRecurrences()).isEqualTo(7);
     }
 
     @Test
@@ -120,7 +120,7 @@ class PriceControllerTest extends TestBase {
     void shouldUpdateOldPriceAndReturnedStatusOk() throws Exception {
         // given
         priceRepository.saveAll(PriceFixture.getPriceList());
-        var oldPrice = PriceFixture.getPriceList().getFirst().getId();
+        var oldPrice = PriceFixture.getPriceList().get(2).getPriceId();
         var newPrice = PriceFixture.getPriceBuilder().build();
         // when
         var result = mockMvc.perform(put("/v1/prices/" + oldPrice)
@@ -132,10 +132,10 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         //then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getId()).isNull();
+        assertThat(priceResponse.getPriceId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("ONE_TIME");
         assertThat(priceResponse.getValue()).isEqualTo(new BigDecimal("100"));
-        assertThat(priceResponse.getRecurrences()).isEqualTo(0);
+        assertThat(priceResponse.getRecurrences()).isNull();
     }
 
     @Test
@@ -147,7 +147,7 @@ class PriceControllerTest extends TestBase {
     void shouldReturnStatusNoContentOfRemovedPrice() throws Exception {
         // given
         var prices = priceRepository.saveAll(PriceFixture.getPriceList());
-        var id = prices.getFirst().getId();
+        var id = prices.getFirst().getPriceId();
         // when
         mockMvc.perform(delete("/v1/prices/" + id))
                 .andExpect(status().isNoContent())

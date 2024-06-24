@@ -49,7 +49,7 @@ public class PriceController {
         var price = priceMapper.toAddPrice(addPriceRequest);
         var createdPrice = priceService.savePrice(price);
         var priceResponse = priceMapper.toPriceResponse(createdPrice);
-        log.info("Created price for id: {} with body {}...", createdPrice.getId(), priceResponse);
+        log.info("Created price for id: {} with body {}...", createdPrice.getPriceId(), priceResponse);
         return new ResponseEntity<>(priceResponse, HttpStatus.CREATED);
     }
 
@@ -60,7 +60,7 @@ public class PriceController {
         var price = priceMapper.toModifyPrice(modifyPriceRequest);
         var modyfiedPrice = priceService.updatePrice(id, price);
         var priceResponse = priceMapper.toPriceResponse(modyfiedPrice);
-        log.info("Modified price for id: {} with body {}...", modyfiedPrice.getId(), priceResponse);
+        log.info("Modified price for id: {} with body {}...", modyfiedPrice.getPriceId(), priceResponse);
         return new ResponseEntity<>(priceResponse, HttpStatus.OK);
     }
 
