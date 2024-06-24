@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class Price {
 
     @Id
-    private String priceId;
+    private String id;
     private String type;
     private BigDecimal value;
     private Integer recurrences;

@@ -3,8 +3,6 @@ package hr.ht.retail.shopping_cart.services.impl;
 import hr.ht.retail.shopping_cart.exceptions.NotFoundException;
 import hr.ht.retail.shopping_cart.repositories.CartItemRepository;
 import hr.ht.retail.shopping_cart.repositories.models.CartItem;
-import hr.ht.retail.shopping_cart.repositories.models.Customer;
-import hr.ht.retail.shopping_cart.repositories.models.Price;
 import hr.ht.retail.shopping_cart.services.CartItemService;
 import hr.ht.retail.shopping_cart.services.CustomerService;
 import hr.ht.retail.shopping_cart.services.PriceService;
@@ -34,37 +32,19 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public CartItem saveCartItem(CartItem cartItem) {
-        cartItem.setPrice(savePrice(cartItem.getPrice()));
-        cartItem.setCustomer(saveCustomer(cartItem.getCustomer()));
+        cartItem.setPrice(priceService.savePrice(cartItem.getPrice()));
+        cartItem.setCustomer(customerService.saveCustomer(cartItem.getCustomer()));
         return cartItemRepository.save(cartItem);
     }
-
-    private Price savePrice(Price cartItemPrice) {
-        var price = Price.builder()
-                .type(cartItemPrice.getType())
-                .value(cartItemPrice.getValue())
-                .recurrences(cartItemPrice.getRecurrences())
-                .build();
-        return priceService.savePrice(price);
-    }
-
-    private Customer saveCustomer(Customer cartItemCustomer) {
-        var customer = Customer.builder()
-                .firstName(cartItemCustomer.getFirstName())
-                .lastName(cartItemCustomer.getLastName())
-                .email(cartItemCustomer.getEmail())
-                .build();
-        return customerService.saveCustomer(customer);
-    }
-
 
     @Override
     public CartItem updateCartItem(String id, CartItem cartItem) {
         var existingCartItem = getCartItemById(id);
+        existingCartItem.setId(existingCartItem.getId());
         existingCartItem.setOfferId(cartItem.getOfferId());
         existingCartItem.setAction(cartItem.getAction());
-        existingCartItem.setPrice(cartItem.getPrice());
-        existingCartItem.setCustomer(cartItem.getCustomer());
+        existingCartItem.setPrice(existingCartItem.getPrice());
+        existingCartItem.setCustomer(existingCartItem.getCustomer());
         return cartItemRepository.save(existingCartItem);
     }
 

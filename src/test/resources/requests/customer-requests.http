@@ -1,6 +1,6 @@
 @localServer=http://localhost:8080
 @server={{localServer}}
-@id1=66788ec8b95e4715219a7f7f
+@id1=6679594516af2f4f562014f0
 @id2=66788a4bd40709137bbeeb04
 
 ### Get all customers
@@ -31,6 +31,6 @@ Content-Type: application/json
   "email": "doejohn@email.com"
 }
 
-### Delete for this particular id
+### Delete customer for this particular id
 DELETE {{server}}/v1/customers/{{id1}}
 Content-Type: application/json

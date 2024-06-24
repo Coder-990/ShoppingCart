@@ -1,14 +1,14 @@
 @localServer=http://localhost:8080
 @server={{localServer}}
-@id1=66788ec8b95e4715219a7f7f
+@id1=6679597216af2f4f562014f3
 @id2=66788a4bd40709137bbeeb04
 
 ### Get all cart items
 GET {{server}}/v1/cart-items
 Content-Type: application/json
 
-### Get all cart items by the particular id
-GET {{server}}/v1/cart-items
+### Get one cart item by the particular id
+GET {{server}}/v1/cart-items/{{id1}}
 Content-Type: application/json
 
 ### Create cart item
@@ -26,6 +26,29 @@ Content-Type: application/json
   "customer": {
     "firstName": "John",
     "lastName": "Doe",
+    "email": "john.doe@email.com"
+  }
+}
+
+### Update cart item by particular id
+PUT {{server}}/v1/cart-items/{{id1}}
+Content-Type: application/json
+
+{
+  "offerId": "firstOfferUpdate",
+  "action": "MODIFY",
+  "price": {
+    "type": "RECURRING",
+    "value": 25.00,
+    "recurrences": 12
+  },
+  "customer": {
+    "firstName": "John",
+    "lastName": "Doe",
     "email": "john.die@email.com"
   }
 }
+
+### Delete cart item for this particular id
+DELETE {{server}}/v1/cart-items/{{id1}}
+Content-Type: application/json

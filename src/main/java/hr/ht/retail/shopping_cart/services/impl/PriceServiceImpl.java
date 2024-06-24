@@ -37,6 +37,7 @@ public class PriceServiceImpl implements PriceService {
     public Price updatePrice(String id, Price price) {
         var existingPrice = getPriceById(id);
         validateRecurrences(price);
+        existingPrice.setId(existingPrice.getId());
         existingPrice.setType(price.getType());
         existingPrice.setValue(price.getValue());
         existingPrice.setRecurrences(price.getRecurrences());

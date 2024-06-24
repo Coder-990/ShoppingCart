@@ -49,7 +49,7 @@ public class CustomerController {
         var customer = customerMapper.toAddCustomer(addCustomerRequest);
         var savedCustomer = customerService.saveCustomer(customer);
         var customerResponse = customerMapper.toCustomerResponse(savedCustomer);
-        log.info("Created customer for id: {} with body {}...", savedCustomer.getCustomerId(), customerResponse);
+        log.info("Created customer for id: {} with body {}...", savedCustomer.getId(), customerResponse);
         return new ResponseEntity<>(customerResponse, HttpStatus.CREATED);
     }
 
@@ -61,7 +61,7 @@ public class CustomerController {
         var customer = customerMapper.toModifyCustomer(modifyCustomerRequest);
         var updatedCustomer = customerService.updateCustomer(id, customer);
         var customerResponse = customerMapper.toCustomerResponse(updatedCustomer);
-        log.info("Modifying customer for id: {} with body {}...", updatedCustomer.getCustomerId(), customerResponse);
+        log.info("Modifying customer for id: {} with body {}...", updatedCustomer.getId(), customerResponse);
         return new ResponseEntity<>(customerResponse, HttpStatus.OK);
     }
 

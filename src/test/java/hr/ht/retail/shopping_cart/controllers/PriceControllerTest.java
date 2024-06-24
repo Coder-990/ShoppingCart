@@ -55,7 +55,7 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         // then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getPriceId()).isNull();
+        assertThat(priceResponse.getId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("ONE_TIME");
         assertThat(priceResponse.getValue()).isEqualTo("100");
     }
@@ -105,7 +105,7 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         //then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getPriceId()).isNull();
+        assertThat(priceResponse.getId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("RECURRING");
         assertThat(priceResponse.getValue()).isEqualTo(new BigDecimal("10"));
         assertThat(priceResponse.getRecurrences()).isEqualTo(7);
@@ -120,7 +120,7 @@ class PriceControllerTest extends TestBase {
     void shouldUpdateOldPriceAndReturnedStatusOk() throws Exception {
         // given
         priceRepository.saveAll(PriceFixture.getPriceList());
-        var oldPrice = PriceFixture.getPriceList().get(2).getPriceId();
+        var oldPrice = PriceFixture.getPriceList().get(2).getId();
         var newPrice = PriceFixture.getPriceBuilder().build();
         // when
         var result = mockMvc.perform(put("/v1/prices/" + oldPrice)
@@ -132,7 +132,7 @@ class PriceControllerTest extends TestBase {
                 .getContentAsString();
         //then
         var priceResponse = objectMapper.readValue(result, Price.class);
-        assertThat(priceResponse.getPriceId()).isNull();
+        assertThat(priceResponse.getId()).isNull();
         assertThat(priceResponse.getType()).isEqualTo("ONE_TIME");
         assertThat(priceResponse.getValue()).isEqualTo(new BigDecimal("100"));
         assertThat(priceResponse.getRecurrences()).isNull();
@@ -147,7 +147,7 @@ class PriceControllerTest extends TestBase {
     void shouldReturnStatusNoContentOfRemovedPrice() throws Exception {
         // given
         var prices = priceRepository.saveAll(PriceFixture.getPriceList());
-        var id = prices.getFirst().getPriceId();
+        var id = prices.getFirst().getId();
         // when
         mockMvc.perform(delete("/v1/prices/" + id))
                 .andExpect(status().isNoContent())

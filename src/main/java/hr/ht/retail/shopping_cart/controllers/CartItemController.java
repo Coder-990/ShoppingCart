@@ -61,7 +61,7 @@ public class CartItemController {
         var cartItem = cartItemMapper.toModifyCartItem(modifyCartItem);
         var updatedCartItem = cartItemService.updateCartItem(id, cartItem);
         var cartItemResponse = cartItemMapper.toCartItemResponse(updatedCartItem);
-        log.info("Modified cart item for id: {} with body {}...", id, modifyCartItem);
+        log.info("Modified cart item for id: {} with body {}...", id, cartItemResponse);
         return new ResponseEntity<>(cartItemResponse, HttpStatus.OK);
     }
 

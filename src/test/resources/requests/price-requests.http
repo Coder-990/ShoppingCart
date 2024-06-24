@@ -1,6 +1,6 @@
 @localServer=http://localhost:8080
 @server={{localServer}}
-@id1=66758484a291af0f27d7f06e
+@id1=667957f816af2f4f562014ef
 @id2=66743641c754183a747c06bb
 
 ### Get all prices
@@ -47,8 +47,8 @@ Content-Type: application/json
 
 {
   "type": "RECURRING",
-  "value": 18.75,
-  "recurrences": 24
+  "value": 99.75,
+  "recurrences": 7
 }
 
 ### Delete price for this particular id
